@@ -1,0 +1,10 @@
+LaTeX サンプル
+
+\bar{S} = \frac{1}{L} \sum_{t=L}^{2L-1} S_t
+
+
+分数
+\frac{1}{L}
+
+
+\sum_{t=L}^{2L-1} S_t

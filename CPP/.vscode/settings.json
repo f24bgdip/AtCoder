@@ -1,0 +1,12 @@
+{
+    "code-runner.runInTerminal": true,
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "gtest-param-test.h": "c",
+        "stdlib.h": "c"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none",
+}
