@@ -20,7 +20,6 @@ typedef struct {
   int size;
 } EdgeList;
 
-int parent[MAX_VERTEXES];
 EdgeList graph[MAX_EDGES];
 long long int K;
 long long int min_cost = LLONG_MAX;

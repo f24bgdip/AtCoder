@@ -6,5 +6,13 @@ LaTeX サンプル
 分数
 \frac{1}{L}
 
-
+シグマ
 \sum_{t=L}^{2L-1} S_t
+
+f(X)
+
+掛け算
+\times
+
+∑ k=1m​ R i k
+\sum_{k=1}^{m} R_{i_{k}}
