@@ -3,7 +3,8 @@
     "C_Cpp.errorSquiggles": "Disabled",
     "files.associations": {
         "gtest-param-test.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "046-": "c"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"

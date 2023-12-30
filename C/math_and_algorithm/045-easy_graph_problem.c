@@ -1,6 +1,3 @@
-// DFS algorithm in C
-// https://www.programiz.com/dsa/graph-dfs
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,29 +11,8 @@ struct node *createNode(int v);
 struct Graph {
   int numVertices;
   int *visited;
-
-  // We need int** to store a two dimensional array.
-  // Similary, we need struct node** to store an array of Linked lists
   struct node **adjLists;
 };
-
-// DFS algo
-void DFS(struct Graph *graph, int vertex) {
-  struct node *adjList = graph->adjLists[vertex];
-  struct node *temp = adjList;
-
-  graph->visited[vertex] = 1;
-  // printf("Visited %d \n", vertex);
-
-  while (temp != NULL) {
-    int connectedVertex = temp->vertex;
-
-    if (graph->visited[connectedVertex] == 0) {
-      DFS(graph, connectedVertex);
-    }
-    temp = temp->next;
-  }
-}
 
 // Create a node
 struct node *createNode(int v) {
@@ -61,6 +37,26 @@ struct Graph *createGraph(int vertices) {
     graph->visited[i] = 0;
   }
   return graph;
+}
+
+int countVertices(struct Graph *graph) {
+  int count = 0;
+  for (int i = 1; i <= graph->numVertices; i++) {
+    int smallerNeighbors = 0;
+    struct node *temp = graph->adjLists[i - 1];
+
+    while (temp != NULL) {
+      if (temp->vertex < i) {
+        smallerNeighbors++;
+      }
+      temp = temp->next;
+    }
+
+    if (smallerNeighbors == 1) {
+      count++;
+    }
+  }
+  return count;
 }
 
 // Add edge
@@ -118,22 +114,12 @@ int main() {
     int src, dest;
     if (scanf("%d %d", &src, &dest) != 2)
       return -1;
-    addEdge(graph, src - 1, dest - 1); // 頂点番号を0ベースに変換
+    addEdge(graph, src - 1, dest - 1);
   }
 
-  DFS(graph, 0);
+  int result = countVertices(graph);
+  printf("%d\n", result);
 
-  // 全ての頂点が訪問されたかチェック
-  for (int i = 0; i < N; i++) {
-    if (graph->visited[i] == 0) {
-      printf("The graph is not connected.\n");
-      return 0;
-    }
-  }
-
-  printf("The graph is connected.\n");
-
-  // メモリ解放
   freeGraph(graph);
 
   return 0;

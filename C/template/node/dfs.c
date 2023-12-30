@@ -1,4 +1,4 @@
-// DFS algorithm in C
+// dfs algorithm in C
 // https://www.programiz.com/dsa/graph-dfs
 
 #include <stdio.h>
@@ -20,19 +20,19 @@ struct Graph {
   struct node **adjLists;
 };
 
-// DFS algo
-void DFS(struct Graph *graph, int vertex) {
+// dfs algo
+void dfs(struct Graph *graph, int vertex) {
   struct node *adjList = graph->adjLists[vertex];
   struct node *temp = adjList;
 
   graph->visited[vertex] = 1;
-  printf("Visited %d \n", vertex);
+  // printf("Visited %d \n", vertex);
 
   while (temp != NULL) {
     int connectedVertex = temp->vertex;
 
     if (graph->visited[connectedVertex] == 0) {
-      DFS(graph, connectedVertex);
+      dfs(graph, connectedVertex);
     }
     temp = temp->next;
   }
@@ -90,16 +90,51 @@ void printGraph(struct Graph *graph) {
   }
 }
 
+void freeGraph(struct Graph *graph) {
+  for (int i = 0; i < graph->numVertices; i++) {
+    struct node *adjList = graph->adjLists[i];
+    struct node *temp;
+
+    while (adjList != NULL) {
+      temp = adjList;
+      adjList = adjList->next;
+      free(temp);
+    }
+  }
+
+  free(graph->adjLists);
+  free(graph->visited);
+  free(graph);
+}
+
 int main() {
-  struct Graph *graph = createGraph(4);
-  addEdge(graph, 0, 1);
-  addEdge(graph, 0, 2);
-  addEdge(graph, 1, 2);
-  addEdge(graph, 2, 3);
+  int N, M;
+  if (scanf("%d %d", &N, &M) != 2)
+    return -1;
 
-  printGraph(graph);
+  struct Graph *graph = createGraph(N);
 
-  DFS(graph, 2);
+  for (int i = 0; i < M; i++) {
+    int src, dest;
+    if (scanf("%d %d", &src, &dest) != 2)
+      return -1;
+    addEdge(graph, src - 1, dest - 1); // 頂点番号を0ベースに変換
+  }
+
+  dfs(graph, 0);
+
+  // 全ての頂点が訪問されたかチェック
+  for (int i = 0; i < N; i++) {
+    if (graph->visited[i] == 0) {
+      printf("The graph is not connected.\n");
+      return 0;
+    }
+  }
+
+  printf("The graph is connected.\n");
+
+  // メモリ解放
+  freeGraph(graph);
 
   return 0;
 }
