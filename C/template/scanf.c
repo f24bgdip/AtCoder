@@ -35,7 +35,7 @@ int main(void) {
   }
 
   char S[100 + 1];
-  if (scanf("%S", S) != 1)
+  if (scanf("%s", S) != 1)
     return -1;
 
   printf("%d\n", N);

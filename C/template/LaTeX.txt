@@ -1,5 +1,9 @@
 LaTeX サンプル
 
+参考
+https://mathlandscape.com/latex-matrix/
+
+
 \bar{S} = \frac{1}{L} \sum_{t=L}^{2L-1} S_t
 
 
@@ -7,7 +11,7 @@ LaTeX サンプル
 \frac{1}{L}
 
 シグマ
-\sum_{t=L}^{2L-1} S_t
+\sum_{k=0}^{n} ar^k
 
 f(X)
 
@@ -16,3 +20,33 @@ f(X)
 
 ∑ k=1m​ R i k
 \sum_{k=1}^{m} R_{i_{k}}
+
+上付き
+A^n
+
+下付き
+A_i
+
+行列
+\begin{pmatrix}
+   a & b \\
+   c & d
+\end{pmatrix}
+\begin{pmatrix}
+   F_{n} \\
+   F_{n-1}
+\end{pmatrix}
+
+\begin{pmatrix}
+   2a_{n}+a_{n-1} \\
+   a_{n}
+\end{pmatrix}
+
+\begin{pmatrix}
+   1 & 2 \\
+   3 & 4
+\end{pmatrix}
+\begin{pmatrix}
+   a & b \\
+   c & d
+\end{pmatrix}

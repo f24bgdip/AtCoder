@@ -4,7 +4,10 @@
     "files.associations": {
         "gtest-param-test.h": "c",
         "stdlib.h": "c",
-        "046-": "c"
+        "046-": "c",
+        "*.tcc": "c",
+        "string": "c",
+        "string_view": "c"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
