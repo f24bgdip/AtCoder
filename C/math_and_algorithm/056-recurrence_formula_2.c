@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -50,10 +51,21 @@ void matrix_multiply(int size, ll matA[size][size], ll matB[size][size],
   memcpy(result, temp, sizeof(temp));
 }
 
+void print_matrix(int size, ll matrix[size][size]) {
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      printf("%lld ", matrix[i][j]);
+    }
+    printf("\n");
+  }
+  printf("\n");
+}
+
 // 行列の累乗を行う関数
 // mat: 累乗する行列
 // n: 累乗の度数
 void matrix_power(int size, ll mat[size][size], ll n, ll mod) {
+  // nが0または1の場合、行列の累乗は不要
   if (n == 0 || n == 1)
     return;
 
@@ -77,22 +89,33 @@ ll fibonacci(ll n, ll mod) {
 
   ll coeff_matrix[2][2] = {{1, 1}, {1, 0}};
   matrix_power(matrix_size, coeff_matrix, n - matrix_size, MOD);
+  // n = 1, 2の結果を含んだ状態行列
+  ll result_state[2][2] = {{1, 0}, {1, 1}};
+  // coeff_matrixとresult_stateの内積を計算
+  matrix_multiply(matrix_size, coeff_matrix, result_state, result_state, mod);
 
-  return (coeff_matrix[0][0] + coeff_matrix[0][1]);
+  return (result_state[0][0]);
 }
 
-// トリボナッチ数列の第 N 項を計算する関数
 ll tribonacci(ll n, ll mod) {
   int matrix_size = 3;
+  // nが1または2の場合、トリボナッチ数列は1を返す
   if (n == 1 || n == 2)
     return 1;
+  // nが3の場合、トリボナッチ数列は2を返す
   if (n == 3)
     return 2;
 
+  // トリボナッチ数列の係数行列の定義
   ll coeff_matrix[3][3] = {{1, 1, 1}, {1, 0, 0}, {0, 1, 0}};
-  matrix_power(matrix_size, coeff_matrix, n - matrix_size, MOD);
+  // coeff_matrixをn-3乗する
+  matrix_power(matrix_size, coeff_matrix, n - matrix_size, mod);
+  // n = 1, 2, 3の結果を含んだ状態行列、result[0][0]に解を生成する
+  ll result_state[3][3] = {{2, 0, 0}, {1, 1, 0}, {1, 0, 1}};
+  // coeff_matrixとresult_stateの内積を計算
+  matrix_multiply(matrix_size, coeff_matrix, result_state, result_state, mod);
 
-  return (coeff_matrix[0][0] + coeff_matrix[0][1] + coeff_matrix[0][2]) % MOD;
+  return (result_state[0][0]);
 }
 
 int main() {
@@ -100,8 +123,10 @@ int main() {
   if (scanf("%lld", &n) != 1)
     return -1;
 
-  // printf("fibonacci = %lld\n", fibonacci(n, MOD));
-  printf("tribonacci = %lld\n", tribonacci(n, MOD));
+  // fibonacci
+  printf("%lld\n", fibonacci(n, MOD));
+  // tribonacci
+  printf("%lld\n", tribonacci(n, MOD));
 
   return 0;
 }

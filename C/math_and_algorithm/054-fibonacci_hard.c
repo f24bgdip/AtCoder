@@ -1,4 +1,6 @@
+#include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 
 #define ll long long
 #define MOD 1000000000
@@ -32,13 +34,21 @@ ll fibonacci(ll n, ll mod) {
   return res[0][0];
 }
 
+#define TEST true
 int main() {
   ll N;
   if (scanf("%lld", &N) != 1)
     return -1;
 
-  ll result = fibonacci(N, MOD);
-  printf("%lld\n", result);
+  if (TEST) {
+    for (int i = 1; i < 1000; i++) {
+      ll result = fibonacci(i, MOD);
+      printf("%d %lld\n", i, result);
+    }
+  } else {
+    ll result = fibonacci(N, MOD);
+    printf("%lld\n", result);
+  }
 
   return 0;
 }
