@@ -6,16 +6,14 @@
 #define MOD 1000000007
 #define MAX_MATRIX_SIZE 3 // 最大行列サイズ
 
-// 指定されたサイズの単位行列を初期化する関数
-void initialize_identity_matrix(int size, ll matrix[size][size]) {
+void print_matrix(int size, ll matrix[size][size]) {
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
-      if (i == j)
-        matrix[i][j] = 1;
-      else
-        matrix[i][j] = 0;
+      printf("%lld ", matrix[i][j]);
     }
+    printf("\n");
   }
+  printf("\n");
 }
 
 // 指定されたサイズの単位行列を初期化する関数
@@ -51,20 +49,22 @@ void matrix_multiply(int size, ll matA[size][size], ll matB[size][size],
   memcpy(result, temp, sizeof(temp));
 }
 
-void print_matrix(int size, ll matrix[size][size]) {
+// 指定されたサイズの単位行列を初期化する関数
+void initialize_identity_matrix(int size, ll matrix[size][size]) {
   for (int i = 0; i < size; i++) {
     for (int j = 0; j < size; j++) {
-      printf("%lld ", matrix[i][j]);
+      if (i == j)
+        matrix[i][j] = 1;
+      else
+        matrix[i][j] = 0;
     }
-    printf("\n");
   }
-  printf("\n");
 }
 
 // 行列の累乗を行う関数
-// mat: 累乗する行列
+// matrix: 累乗する行列
 // n: 累乗の度数
-void matrix_power(int size, ll mat[size][size], ll n, ll mod) {
+void matrix_power(int size, ll matrix[size][size], ll n, ll mod) {
   // nが0または1の場合、行列の累乗は不要
   if (n == 0 || n == 1)
     return;
@@ -74,12 +74,12 @@ void matrix_power(int size, ll mat[size][size], ll n, ll mod) {
 
   while (n > 0) {
     if (n % 2 == 1) {
-      matrix_multiply(size, mat, temp, temp, mod);
+      matrix_multiply(size, matrix, temp, temp, mod);
     }
-    matrix_multiply(size, mat, mat, mat, mod);
+    matrix_multiply(size, matrix, matrix, matrix, mod);
     n /= 2;
   }
-  memcpy(mat, temp, sizeof(temp));
+  memcpy(matrix, temp, sizeof(temp));
 }
 
 ll fibonacci(ll n, ll mod) {
@@ -87,9 +87,10 @@ ll fibonacci(ll n, ll mod) {
   if (n == 1 || n == 2)
     return 1;
 
+  // フィボナッチ数列の係数行列の定義
   ll coeff_matrix[2][2] = {{1, 1}, {1, 0}};
   matrix_power(matrix_size, coeff_matrix, n - matrix_size, MOD);
-  // n = 1, 2の結果を含んだ状態行列
+  // n = 1, 2の結果を含んだ状態行列、result[0][0]に解を生成する
   ll result_state[2][2] = {{1, 0}, {1, 1}};
   // coeff_matrixとresult_stateの内積を計算
   matrix_multiply(matrix_size, coeff_matrix, result_state, result_state, mod);

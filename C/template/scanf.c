@@ -19,6 +19,19 @@ long long int_pow(int b, int e) {
   return r;
 }
 
+// 繰り返し二乗法によるべき乗計算
+long long mod_pow(long long base, long long exp, long long mod) {
+  long long result = 1;
+  while (exp > 0) {
+    if (exp % 2 == 1) {
+      result = (result * base) % mod;
+    }
+    base = (base * base) % mod;
+    exp /= 2;
+  }
+  return result;
+}
+
 int main(void) {
   int N;
   if (scanf("%d", &N) != 1)
@@ -40,6 +53,7 @@ int main(void) {
 
   printf("%d\n", N);
   printf("%lld\n", dp[N - 1]);
+  printf("%s\n", S);
   printf("%c\n", S[0]);
 
   return 0;
