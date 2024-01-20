@@ -1,16 +1,14 @@
 #include <stdio.h>
+#define rep(i, n) for (int i = 0; i < (n); ++i)
+typedef long long ll;
 
 int min(int a, int b) { return (a < b) ? a : b; }
 int max(int a, int b) { return (a > b) ? a : b; }
-long long int llmin(long long int a, long long int b) {
-  return (a < b) ? a : b;
-}
-long long int llmax(long long int a, long long int b) {
-  return (a > b) ? a : b;
-}
+ll int ll_min(ll int a, ll int b) { return (a < b) ? a : b; }
+ll int ll_max(ll int a, ll int b) { return (a > b) ? a : b; }
 
-long long int_pow(int b, int e) {
-  long long r = 1;
+ll int_pow(int b, int e) {
+  ll r = 1;
   for (int i = 0; i < e; ++i) {
     if (LLONG_MAX / r < b)
       return LLONG_MAX;
@@ -20,8 +18,8 @@ long long int_pow(int b, int e) {
 }
 
 // 繰り返し二乗法によるべき乗計算
-long long mod_pow(long long base, long long exp, long long mod) {
-  long long result = 1;
+ll mod_pow(ll base, ll exp, ll mod) {
+  ll result = 1;
   while (exp > 0) {
     if (exp % 2 == 1) {
       result = (result * base) % mod;
