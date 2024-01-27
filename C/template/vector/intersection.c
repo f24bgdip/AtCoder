@@ -37,11 +37,20 @@ Vector calculate_normal_vector(Point a, Point b) {
 }
 
 double dot_product(Vector a, Vector b) { return a.a * b.a + a.b * b.b; }
+
+// 2次元ベクトルの外積（z成分）
+// 行列式が0の場合、2つの直線は平行（または同一）で交点を持たない
+// 行列式が0でない場合、2つの直線は一点で交差する
 double cross_product_vector(Vector a, Vector b) {
   return b.b * a.a - b.a * a.b;
 }
+
 double cross_product_point(Point a, Point b, Point c) {
   return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+}
+
+double cross_product_2d(double a1, double a2, double b1, double b2) {
+  return a1 * b2 - a2 * b1;
 }
 
 // 使用条件: cross_product == 0 であること
