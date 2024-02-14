@@ -7,14 +7,15 @@ int max(int a, int b) { return (a > b) ? a : b; }
 ll int ll_min(ll int a, ll int b) { return (a < b) ? a : b; }
 ll int ll_max(ll int a, ll int b) { return (a > b) ? a : b; }
 
-ll int_pow(int b, int e) {
-  ll r = 1;
-  for (int i = 0; i < e; ++i) {
-    if (LLONG_MAX / r < b)
+ll int_pow(int base, int exp) {
+  ll result = 1;
+  for (int i = 0; i < exp; ++i) {
+    if (LLONG_MAX / result < base) {
       return LLONG_MAX;
-    r *= b;
+    }
+    result *= base;
   }
-  return r;
+  return result;
 }
 
 // 繰り返し二乗法によるべき乗計算
