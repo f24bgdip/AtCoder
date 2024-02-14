@@ -12,6 +12,7 @@ long long int_pow(int base, int exp) {
   return result;
 }
 
+
 int main() {
   long long B;
 
