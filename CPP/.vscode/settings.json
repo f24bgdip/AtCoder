@@ -18,7 +18,8 @@
         "span": "c",
         "regex": "c",
         "valarray": "c",
-        "stacktrace": "c"
+        "stacktrace": "c",
+        "ostream": "cpp"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
