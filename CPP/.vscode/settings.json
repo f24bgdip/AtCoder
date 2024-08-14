@@ -19,7 +19,8 @@
         "regex": "c",
         "valarray": "c",
         "stacktrace": "c",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iostream": "cpp"
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
