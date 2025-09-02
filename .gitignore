@@ -91,3 +91,4 @@ dkms.conf
 atcoder/
 note.txt
 debug_output.txt
+.vscode/tasks.json
